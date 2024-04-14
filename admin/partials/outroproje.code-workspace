@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"path": "../../../outroproje"
+		},
+		{
+			"path": "../../../treinoPhp"
+		},
+		{
+			"path": "../../../First-Proj"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../to-do-list"
+		},
+		{
+			"path": "../../../chef-em-casa"
+		},
+		{
+			"path": "../../../../../MinGW/c programas"
+		},
+		{
+			"path": "../../../laravelproje/course-app"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "outroproje"
+	}
+}
