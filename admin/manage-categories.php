@@ -28,6 +28,7 @@
                         <h5>Manage Post</h5>
                     </a>
                 </li>
+                <?php  if(isset($_SESSION['user_is_admin'])) :  ?>
                 <li>
                     <a href="add-user.php">
                         <ion-icon name="person-add-outline"></ion-icon>
@@ -52,6 +53,7 @@
                         <h5>Manage Categories</h5>
                     </a>
                 </li>
+                <?php   endif   ?>
             </ul>
         </aside>
 
