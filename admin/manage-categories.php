@@ -16,14 +16,14 @@
         <aside>
             <ul>
                 <li>
-                    <a href="dashboard.php">
+                    <a href="index.php">
                         <ion-icon name="newspaper-outline"></ion-icon>
                         <h5>Add Post</h5>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="dashboard.php">
+                    <a href="index.php.php">
                         <ion-icon name="create-outline"></ion-icon>
                         <h5>Manage Post</h5>
                     </a>

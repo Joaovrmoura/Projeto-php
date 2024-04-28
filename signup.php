@@ -8,8 +8,8 @@
    $createpassword = $_SESSION['signup-data']['createpassword'] ??null;
    $confirmpassword = $_SESSION['signup-data']['confirmpassword'] ??null;
   //delete
-
-?>
+   unset($_SESSION['signup-data']);
+   ?>
 
 
 

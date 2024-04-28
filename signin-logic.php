@@ -35,7 +35,7 @@ if(isset($_POST['submit'])){
                     $_SESSION['user_is_admin'] = true;
 
                 }
-                header('location: '. ROOT_URL . 'admin/');
+                header('location: '. ROOT_URL . 'admin/index.php');
             }
             else{
                 $_SESSION['signin'] = "Please Check your input";
@@ -53,6 +53,6 @@ if(isset($_POST['submit'])){
     }
 
 }else{
-    header('location:signin.php');
+    header('location:'. ROOT_URL .'signin.php');
     die();
 }

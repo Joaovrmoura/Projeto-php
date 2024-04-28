@@ -29,10 +29,10 @@
     <div class="container form_section-container">
         <h2>Sign In</h2>
         <?php if(isset($_SESSION['signup-success'])) : ?>
-            <div class="alert_message sucess">
+            <div class="alert_message success">
             <p>
-               <?= $_SESSION['signup-sucess'];
-               unset($_SESSION['signup-success']); 
+               <?= $_SESSION['signin-sucess'];
+               unset($_SESSION['signin-success']); 
                ?> 
             </p>
         </div>

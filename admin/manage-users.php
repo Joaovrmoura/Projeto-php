@@ -1,11 +1,59 @@
 
 <?php
  
- include 'partials/header.php';
+include 'partials/header.php';
+
+$current_admin_id = $_SESSION['user-id'];
+
+$query =  "SELECT * FROM users WHERE NOT id=$current_admin_id";
+$users =  mysqli_query($connection, $query);
+
+
 
 ?>
 
 <section class="dashboard">
+    <?php if(isset($_SESSION['add-user-success'])) : ?>
+        <div class="alert_message sucess container">
+            <p>
+               <?= $_SESSION['add-user-success'];
+               unset($_SESSION['add-user-success']); 
+               ?> 
+            </p>
+        </div>
+    <?php elseif(isset($_SESSION['edit-user-success'])) : ?>
+        <div class="alert_message sucess container">
+            <p>
+               <?= $_SESSION['edit-user-success'];
+               unset($_SESSION['edit-user-success']); 
+               ?> 
+            </p>
+        </div>
+        <?php elseif(isset($_SESSION['edit-user'])) : ?>
+        <div class="alert_message error container">
+            <p>
+               <?= $_SESSION['edit-user'];
+               unset($_SESSION['edit-user']); 
+               ?> 
+            </p>
+        </div>
+        <?php elseif(isset($_SESSION['delete-user'])) : ?>
+        <div class="alert_message error container">
+            <p>
+               <?= $_SESSION['delete-user'];
+               unset($_SESSION['delete-user']); 
+               ?> 
+            </p>
+        </div>
+        <?php elseif(isset($_SESSION['delete-user-success'])) : ?>
+        <div class="alert_message sucess container">
+            <p>
+               <?= $_SESSION['delete-user-success'];
+               unset($_SESSION['delete-user-success']); 
+               ?> 
+            </p>
+        </div>
+         <?php endif ?>
     <div class="container dashboard_container">
 
         <button id="show_sidebar-btn" class="sidebar_toggle">
@@ -15,10 +63,11 @@
             <ion-icon name="arrow-back-outline"></ion-icon>
         </button>
 
+
         <aside>
             <ul>
                 <li>
-                    <a href="dashboard.php">
+                    <a href="add-post.php">
                         <ion-icon name="newspaper-outline"></ion-icon>
                         <h5>Add Post</h5>
                     </a>
@@ -30,6 +79,7 @@
                         <h5>Manage Post</h5>
                     </a>
                 </li>
+                <?php  if(isset($_SESSION['user_is_admin'])) :  ?>
                 <li>
                     <a href="add-user.php">
                         <ion-icon name="person-add-outline"></ion-icon>
@@ -54,6 +104,7 @@
                         <h5>Manage Categories</h5>
                     </a>
                 </li>
+                <?php  endif ?>
             </ul>
         </aside>
 
@@ -70,27 +121,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($user = mysqli_fetch_assoc($users)) : ?>
                     <tr>
-                        <td>Jane doe</td>
-                        <td>Jane223</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                        <td>Yes</td>
+                        <td><?= "{$user['firstname']} {$user['lastname']}" ?></td>
+                        <td><?= $user['username'] ?></td>
+                        <td><a href="<?= ROOT_URL ?>admin/edit-user.php?id=<?= $user['id'] ?>
+                        " class="btn sm">Edit</a></td>
+                        <td><a href="<?= ROOT_URL ?>admin/delete-user.php?id=<?= $user['id'] ?>
+                        " class="btn sm danger">Delete</a></td>
+                        <td><?= $user['is_admin'] ? 'Yes' : 'No' ?></td>
                     </tr>
-                    <tr>
-                        <td>Ernensto GArcia</td>
-                        <td>achiever</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Daniel Vinyo</td>
-                        <td>daniel</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                        <td>Yes</td>
-                    </tr>
+                    <?php   endwhile ?>
                 </tbody>
              </table>
         </main>
