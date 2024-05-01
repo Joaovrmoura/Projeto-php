@@ -14,7 +14,7 @@ $users =  mysqli_query($connection, $query);
 
 <section class="dashboard">
     <?php if(isset($_SESSION['add-user-success'])) : ?>
-        <div class="alert_message sucess container">
+        <div class="alert_message success container">
             <p>
                <?= $_SESSION['add-user-success'];
                unset($_SESSION['add-user-success']); 
@@ -22,7 +22,7 @@ $users =  mysqli_query($connection, $query);
             </p>
         </div>
     <?php elseif(isset($_SESSION['edit-user-success'])) : ?>
-        <div class="alert_message sucess container">
+        <div class="alert_message success container">
             <p>
                <?= $_SESSION['edit-user-success'];
                unset($_SESSION['edit-user-success']); 
@@ -46,7 +46,7 @@ $users =  mysqli_query($connection, $query);
             </p>
         </div>
         <?php elseif(isset($_SESSION['delete-user-success'])) : ?>
-        <div class="alert_message sucess container">
+        <div class="alert_message success container">
             <p>
                <?= $_SESSION['delete-user-success'];
                unset($_SESSION['delete-user-success']); 
@@ -74,7 +74,7 @@ $users =  mysqli_query($connection, $query);
                 </li>
                 
                 <li>
-                    <a href="dashboard.php">
+                    <a href="index.php">
                         <ion-icon name="create-outline"></ion-icon>
                         <h5>Manage Post</h5>
                     </a>
@@ -109,7 +109,9 @@ $users =  mysqli_query($connection, $query);
         </aside>
 
         <main>
+
              <h2>Manage users</h2>
+             <?php if(mysqli_num_rows($users) > 0) : ?>
              <table>
                 <thead>
                     <tr>
@@ -134,6 +136,11 @@ $users =  mysqli_query($connection, $query);
                     <?php   endwhile ?>
                 </tbody>
              </table>
+             <?php else : ?>
+                <div class="alert_message error">
+                    <?= "no users Found"?>
+                </div>
+                <?php endif ?>
         </main>
     </div>
 </section>
