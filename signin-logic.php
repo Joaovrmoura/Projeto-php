@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
         $_SESSION['signin'] = "username or Email required";
 
    }elseif(!$password){
-
+    
         $_SESSION['signin'] = "Password Required";
 
     }else{

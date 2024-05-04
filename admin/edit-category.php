@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
     if(mysqli_num_rows($result) == 1){
         $category = mysqli_fetch_assoc($result);
     }
-} else {
+}else{
     header('location:' . ROOT_URL . 'admin/manage-categories.php');
     die();
 }

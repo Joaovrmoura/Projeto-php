@@ -26,13 +26,13 @@ unset($_SESSION['add-post-data']);
         </div>
         <?php endif  ?>
         <form action="<?= ROOT_URL  ?>admin/add-post-logic.php" enctype="multipart/form-data" method="POST">
-            <input type="text" name="title" placeholder="Title">
+            <input type="text" name="title" value="<?= $title ?>" placeholder="Title">
             <select name="category">
                 <?php while($category = mysqli_fetch_assoc($categories)) : ?>
                 <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
                 <?php endwhile ?>
             </select>
-            <textarea rows="10" name="body" placeholder="body"></textarea>
+            <textarea rows="10" name="body" value="<?= $body ?>" placeholder="body"></textarea>
 
             <?php  if(isset($_SESSION['user_is_admin'])) :  ?>
             <div class="form_control inline">

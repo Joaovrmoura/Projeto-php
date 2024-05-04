@@ -3,9 +3,9 @@
  include 'partials/header.php';
 
 $current_user_id = $_SESSION['user-id'];
-$query = "SELECT posts.id, posts.title, posts.category_id FROM posts WHERE 
-author_id=$current_user_id ORDER BY id DESC";
+$query = "SELECT id, title, category_id FROM posts WHERE author_id=$current_user_id ORDER BY id DESC";
 $posts = mysqli_query($connection, $query);
+
 
 ?>
 
@@ -18,7 +18,36 @@ $posts = mysqli_query($connection, $query);
                 ?>
             </p>
         </div>
-        <?php endif ?>
+
+        <?php elseif(isset($_SESSION['edit-post'])) : ?>
+        <div class="alert_message error container">
+            <p>
+                <?= $_SESSION['edit-post'];
+                unset($_SESSION['edit-post']);
+                ?>
+            </p>
+        </div>
+        <?php elseif(isset($_SESSION['edit-post-success'])) : ?>
+        <div class="alert_message success container">
+            <p>
+                <?= $_SESSION['edit-post-success'];
+                unset($_SESSION['edit-post-success']);
+                ?>
+            </p>
+        </div>
+        
+        <?php elseif(isset($_SESSION['delete-post-success'])) : ?>
+        <div class="alert_message success container">
+            <p>
+                <?= $_SESSION['delete-post-success'];
+                unset($_SESSION['delete-post-success']);
+                ?>
+            </p>
+        </div>
+
+
+
+<?php endif ?>
     <div class="container dashboard_container">
 
         <button id="show_sidebar-btn" class="sidebar_toggle">
@@ -43,6 +72,7 @@ $posts = mysqli_query($connection, $query);
                         <h5>Manage Post</h5>
                     </a>
                 </li>
+                
                 <?php  if(isset($_SESSION['user_is_admin'])) : ?>
                 <li>
                     <a href="add-user.php">
@@ -97,7 +127,7 @@ $posts = mysqli_query($connection, $query);
                         <td><?= $category['title'] ?></td>
                         <td><a href="<?= ROOT_URL ?>admin/edit-post.php?id=<?= $post['id'] ?>" 
                         class="btn sm">Edit</a></td>
-                        <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?= $post['id'] ?>" 
+                        <td><a href="<?= ROOT_URL ?>admin/delete-post.php?id=<?= $post['id'] ?>" 
                         class="btn sm danger">Delete</a></td>
                     </tr>
                   <?php endwhile ?>
