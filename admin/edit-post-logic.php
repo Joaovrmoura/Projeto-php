@@ -40,7 +40,7 @@
 
        if(in_array($extension, $allowed_files)){
 
-        if($thumbnail['size'] < 2_000_000){
+        if($thumbnail['size'] < 1000000){
              
             move_uploaded_file($thumbnail_tmp_name, $thumbnail_destination_path);
 
@@ -56,7 +56,9 @@
        
         header('location:'. ROOT_URL .'admin/');
         die();
+
     }else{
+
         if($is_featured == 1){
             $zero_all_is_featured_query = "UPDATE posts SET is_featured=0";
             $zero_all_is_featured_result = mysqli_query($connection, $zero_all_is_featured_query);

@@ -224,8 +224,9 @@ nav button{
     gap: 5rem;
     margin-bottom: 5rem;
 }
-
-
+.section_extra-margin{
+    margin-top: 110px;
+}
 
 /**buttons ==============================================*/
 .category_buttons{
@@ -407,14 +408,17 @@ footer ul a:hover{
     width: var(--form-width);
 }
 .alert_message{
+    text-align: center;
     padding: 0.8rem 1.4rem;
     margin-bottom: 1rem;
     border-radius: var(--card-border-radius-2);
 }
+
 .alert_message.error{
     background: var(--color-red-light);
     color: var(--color-red);
 }
+
 .alert_message.success{
     background: var(--color-green-light);
     color: var(--color-green);

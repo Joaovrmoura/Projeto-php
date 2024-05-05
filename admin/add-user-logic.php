@@ -1,6 +1,7 @@
 <?php
  require 'config/database.php';
 
+ 
 if(isset($_POST['submit'])){
     $firstname = FILTER_VAR($_POST['firstname'],
     FILTER_SANITIZE_SPECIAL_CHARS);  
@@ -18,35 +19,35 @@ if(isset($_POST['submit'])){
 
  // validate input values
  if(!$firstname){
-    $_SESSION['signup'] = "Please enter your first name";
+    $_SESSION['add-user'] = "Please enter your first name";
 }
 elseif(!$lastname){
 
-    $_SESSION['signup'] = "Please enter your last name";
+    $_SESSION['add-user'] = "Please enter your last name";
 }
 elseif(!$username){
     
-    $_SESSION['signup'] = "Please enter your User name";
+    $_SESSION['add-user'] = "Please enter your User name";
 }
 elseif(!$email){
     
-    $_SESSION['signup'] = "Please enter your Email";
+    $_SESSION['add-user'] = "Please enter your Email";
 
 }
 elseif(strlen($createpassword) < 8 || strlen($confirmpassword) < 8){
     
-    $_SESSION['signup'] = "Please password should be 8+ characters";
+    $_SESSION['add-user'] = "Please password should be 8+ characters";
 
 }
 elseif(!$avatar['name']){
 
-    $_SESSION['signup'] = "Please enter your avatar";
+    $_SESSION['add-user'] = "Please enter your avatar";
 
 }else{
 
     if($createpassword !== $confirmpassword){
 
-        $_SESSION['signup'] = "password do not math";
+        $_SESSION['add-user'] = "password do not math";
 
     }else{
 
@@ -58,7 +59,7 @@ elseif(!$avatar['name']){
 
 
         if(mysqli_num_rows($user_check_result) > 0){
-            $_SESSION['signup'] = "USER NAME Already existe";
+            $_SESSION['add-user'] = "USER NAME Already existe";
         }else{
             // work
             $time = time();
@@ -70,26 +71,26 @@ elseif(!$avatar['name']){
             $allowed_files = ['png', 'jpg', 'jpeg'];
             $extention = explode('.', $avatar_name);
             $extention =  end($extention);
+
             if(in_array($extention, $allowed_files)){
                 if($avatar['size'] < 1000000){
 
                     move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
 
                 }else{
-                    $_SESSION['signup'] =  "File size too big. should be smoller";
+                    $_SESSION['add-user'] =  "File size too big. should be smoller";
             }
             }else{
 
-                $_SESSION['signup'] =  "file should be png, jpg or jpeg";
+                $_SESSION['add-user'] =  "file should be png, jpg or jpeg";
             }
         }
     }
 }
 
-if(isset($_SESSION['signup'])){
-
+if(isset($_SESSION['add-user'])){
     $_SESSION['signup-data'] = $_POST;
-    header('location:' . ROOT_URL .'admin/edit-user.php');
+    header('location:' . ROOT_URL .'admin/add-user.php');
     die();
     
 }else{

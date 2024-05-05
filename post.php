@@ -1,37 +1,51 @@
 <?php
-  include'partials/header.php';
+  include 'partials/header.php';
+
+
+  if(isset($_GET['id'])){
+      $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+      $query = "SELECT * FROM posts WHERE id=$id";
+      $result = mysqli_query($connection, $query);
+      $post = mysqli_fetch_assoc($result);
+  }else{
+    header('location:'. ROOT_URL .'blog.php');
+    die();
+  }
 ?>
 
 
     <section class="singlepost">
         <div class="container singlepost_container">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing </h2>
+            <h2>
+                <?= $post['title'] ?>
+            </h2>
             <div class="post_author">
-                    <div class="post_author-avatar">
-                        <img src="./assets/avatar4.jpg" alt="">
-                    </div>
+                <?php 
+                    $author_id = $post['author_id'];
+                    $author_query = "SELECT * FROM users WHERE id=$author_id";
+                    $author_result = mysqli_query($connection, $author_query);
+                    $author = mysqli_fetch_assoc($author_result);
+                ?>
+
+                <div class="post_author-avatar">
+                    <img src="./assets/<?= $author['avatar'] ?>" alt="">
+                </div>
+
                     <div class="post_author-info">
-                        <h5>By: john Mils</h5>
-                        <small>June 10, 2024 - 10:34</small>
+                    <h5>
+                        <?= "{$author['firstname']} {$author['lastname']}" ?>
+                    </h5>
+                        <small>
+                            <?= date("M d, Y - H:i", strtotime($post['date_time']))?>
+                        </small>
                     </div>
-                 </div>
+                </div>
             <div class="singlepost_thumbnail">
-                <img src="./assets/blog33.jpg" alt="">
+                <img src="./assets/<?= $post['thumbnail'] ?>" alt="">
             </div>     
-               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatu
-                r omnis quo excepturi, provident voluptatem libero. Dignissimos te
-                mporibus impedit placeat soluta ex nulla minus pariatur, enim qu
-                od ipsum consequuntur quos consequatur quibusdam voluptate ac
-                cusantium tenetur voluptatem alias officia fugiat corrupti doloremque!
-               </p>     
-               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatu
-                r omnis quo excepturi, provident voluptatem libero. Dignissimos te
-                mporibus impedit placeat soluta ex nulla minus pariatur, enim qu
-                od ipsum consequuntur quos consequatur quibusdam voluptate ac
-                cusantium tenetur voluptatem alias officia fugiat corrupti doloremque!
-               </p>         
+            <p>
+                <?= $post['body'] ?>
+            </p>            
         </div>
     </section>
 <!------End of Single_post -->

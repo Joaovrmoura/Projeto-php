@@ -1,26 +1,19 @@
 <?php
- include 'partials/header.php';
+require 'partials/header.php';
 
- 
-$query = "SELECT * FROM posts ORDER BY date_time DESC";
-$posts = mysqli_query($connection, $query);
+if(isset($_GET['search']) && isset($_GET['submit'])){
+    
+    $search = filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $query = "SELECT * FROM posts WHERE title LIKE '%$search%' ORDER BY date_time DESC";
+    $posts = mysqli_query($connection, $query);
 
+}else{
+    header('location'. ROOT_URL .'blog.php');
+}
 ?>
 
-<section class="search_bar">
-    <form class="search_bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
-        <div>
-        <ion-icon name="search-outline"></ion-icon>
-        <input type="search" name="search" placeholder="Search">
-        </div>
-        <button type="submit" name="submit" class="btn">Go</button>
-    </form>
-</section>
-   <!------ End of Search-->
-
-
-
-<section class="posts <?= $featured ? '' :  'section_extra-margin' ?>">
+<?php if(mysqli_num_rows($posts) > 0) : ?>
+<section class="posts section_extra-margin">
     <div class="container posts_container">
     <?php  while($post = mysqli_fetch_assoc($posts)) : ?>
         <article class="post">
@@ -68,10 +61,14 @@ $posts = mysqli_query($connection, $query);
        <?php endwhile ?>
     </div>
 </section>
+
+<?php else : ?>
+    <div class="alert_message error lg section_extra-margin">
+        <p>No posts for This search</p>
+    </div>
+<?php endif ?>
 <!-------End of posts-------------->
 
-
-   
 <section class="category_buttons">
         <div class="container category_buttons-container">
            <?php
@@ -86,7 +83,5 @@ $posts = mysqli_query($connection, $query);
     </section>
 
 
-<!-------End of Buttons section-------------->
-<?php
-include 'partials/footer.php';
-?>
+
+<?php include 'partials/footer.php'; ?>

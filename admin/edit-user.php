@@ -18,7 +18,7 @@ if(isset($_GET['id'])){
 <section class="form_section">
     <div class="container form_section-container">
         <h2>Edit User</h2>
-        <form action="<?php ROOT_URL ?>edit-user-logic.php" method="POST">
+        <form action="<?php ROOT_URL ?>edit-user-logic.php" enctype="multipart/form-data" method="POST">
             <input type="hidden" value="<?= $user['id'] ?>" name="id">
             <input type="text" value="<?= $user['firstname'] ?>" name="firstname" placeholder="First Name">
             <input type="text" value="<?= $user['lastname'] ?>" name="lastname" placeholder="Last Name">
@@ -26,6 +26,10 @@ if(isset($_GET['id'])){
                 <option value="0">Author</option>
                 <option value="1">Admin</option>
             </select>
+            <div class="form_control">
+                <label for="avatar">Add Avatar</label>
+                <input type="file" name="avatar" id="avatar">
+            </div>
             <button type="submit" name="submit" class="btn">Update User</button>
         </form>
     </div>
