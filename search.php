@@ -1,4 +1,6 @@
 <?php
+
+
 require 'partials/header.php';
 
 if(isset($_GET['search']) && isset($_GET['submit'])){
@@ -11,6 +13,7 @@ if(isset($_GET['search']) && isset($_GET['submit'])){
     header('location'. ROOT_URL .'blog.php');
 }
 ?>
+
 
 <?php if(mysqli_num_rows($posts) > 0) : ?>
 <section class="posts section_extra-margin">
