@@ -33,8 +33,10 @@ unset($_SESSION['add-user-data']);
             <input type="text" name="lastname" value="<?= $lastname ?>" placeholder="Last Name">
             <input type="text" name="username" value="<?= $username ?>" placeholder="UserName">
             <input type="email" name="email" value="<?= $email ?>" placeholder="Email">
-            <input type="password" name="createpassword" value="<?= $createpassword ?>" placeholder="Password">
-            <input type="password" name="confirmpassword" value="<?= $confirmpassword ?>" placeholder="Confirme Password">
+            <input type="password" name="createpassword" value="<?= $createpassword ?>" 
+            placeholder="Password">
+            <input type="password" name="confirmpassword" value="<?= $confirmpassword ?>" 
+            placeholder="Confirme Password">
             <select name="userrole">
                 <option value="0">Author</option>
                 <option value="1" >Admin</option>

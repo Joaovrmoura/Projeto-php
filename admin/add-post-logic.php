@@ -10,7 +10,7 @@
     $is_featured = filter_var($_POST['is_featured'], FILTER_SANITIZE_NUMBER_INT);
     $thumbnail = $_FILES['thumbnail'];
 
-    $is_featured =  $is_featured == 1 ? : 0;
+    $is_featured = $is_featured == 1 ? : 0;
 
     if(!$title){
         $_SESSION['add-post'] = "Enter post title" ;
